@@ -19,7 +19,7 @@ class Knowledge
         }
     }
 
-    public static function getOne($id)
+    public static function getDetail($id)
     {
         try {
             $con = new Connection();
