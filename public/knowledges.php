@@ -1,9 +1,11 @@
 <?php
 
-require_once('./models/Knowledge.php');
+require '../vendor/autoload.php';
+
+use \App\models\Knowledge;
+use \App\modules\Response;
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-
     if (isset($_GET['id'])) {
         Knowledge::getDetail($_GET['id']);
     } else {

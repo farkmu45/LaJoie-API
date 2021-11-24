@@ -1,8 +1,12 @@
 <?php
+namespace App\models;
+
+use App\modules\Response;
+use App\modules\Connection;
+use PDO;
+use PDOException;
 
 
-require_once('./modules/Response.php');
-require_once('./modules/Connection.php');
 
 class Question
 {

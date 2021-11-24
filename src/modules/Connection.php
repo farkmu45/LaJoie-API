@@ -1,12 +1,17 @@
 <?php
 
+namespace App\modules;
+
+use PDO;
+use PDOException;
+
 class Connection
 {
     public $db;
-    private $host = 'sql310.unaux.com';
-    private $username = 'unaux_30438663';
-    private $password = 'maulana123';
-    private $databaseName = 'unaux_30438663_lajoie';
+    private $host = 'localhost';
+    private $username = 'root';
+    private $password = '';
+    private $databaseName = 'lajoie';
 
     public function __construct()
     {

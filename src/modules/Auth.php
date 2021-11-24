@@ -1,6 +1,11 @@
 <?php
 
-require_once('./models/User.php');
+namespace App\modules;
+
+use App\models\User;
+use PDO;
+use PDOException;
+
 
 class Auth
 {

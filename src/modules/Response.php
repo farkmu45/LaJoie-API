@@ -1,5 +1,7 @@
 <?php
 
+namespace App\modules;
+
 class Response
 {
     public static $DATA_CREATED =  201;

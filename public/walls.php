@@ -1,6 +1,9 @@
 <?php
-require_once('./modules/Auth.php');
-require_once('./models/Question.php');
+
+require '../vendor/autoload.php';
+
+use App\modules\Auth;
+use App\models\Question;
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     Auth::guard();
