@@ -1,9 +1,9 @@
 <?php
 
-namespace App\models;
+namespace LaJoie\models;
 
-use App\modules\Response;
-use App\modules\Connection;
+use LaJoie\modules\Response;
+use LaJoie\modules\Connection;
 use PDO;
 use PDOException;
 

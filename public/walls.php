@@ -2,8 +2,8 @@
 
 require '../vendor/autoload.php';
 
-use App\modules\Auth;
-use App\models\Question;
+use LaJoie\modules\Auth;
+use LaJoie\models\Question;
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     Auth::guard();

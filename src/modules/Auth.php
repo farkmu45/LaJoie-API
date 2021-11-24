@@ -1,8 +1,8 @@
 <?php
 
-namespace App\modules;
+namespace LaJoie\modules;
 
-use App\models\User;
+use LaJoie\models\User;
 use PDO;
 use PDOException;
 

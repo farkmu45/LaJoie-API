@@ -2,8 +2,8 @@
 
 require '../vendor/autoload.php';
 
-use \App\models\Knowledge;
-use \App\modules\Response;
+use LaJoie\models\Knowledge;
+use LaJoie\modules\Response;
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     if (isset($_GET['id'])) {
@@ -11,7 +11,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     } else {
         Knowledge::getAll();
     }
-    
 } else {
     new Response(["message" => "Not found"], 404);
 }

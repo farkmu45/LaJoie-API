@@ -1,6 +1,6 @@
 <?php
 
-namespace App\modules;
+namespace LaJoie\modules;
 
 use Dotenv\Dotenv;
 use PDO;
