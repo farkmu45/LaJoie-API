@@ -24,7 +24,14 @@ class AuthUnitTest extends TestCase
     /** @test */
     public function loginWithNoDataReturns401NotAuthenticated()
     {
-        Auth::login("", "maulana123");
+        Auth::login("", "");
+        $this->assertEquals(401, http_response_code());
+    }
+
+    /** @test */
+    public function loginWithInvalidDataReturns401NotAuthenticated()
+    {
+        Auth::login("dsafas", "fdafdsf");
         $this->assertEquals(401, http_response_code());
     }
 
