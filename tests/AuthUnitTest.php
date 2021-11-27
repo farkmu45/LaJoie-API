@@ -39,6 +39,6 @@ class AuthUnitTest extends TestCase
     public function loginWithValidEmailAndPasswordReturns200OK()
     {
         Auth::login("fark@gmail.com", "maulana123");
-        $this->assertJson(200, http_response_code());
+        $this->assertEquals(200, http_response_code());
     }
 }
