@@ -15,7 +15,7 @@ class Auth
             $stmt = User::getByEmail($email);
             if ($stmt->rowCount() == 0) {
                 new Response(["message" => "User not found"], 401);
-                exit();
+                return;
             }
             $user = $stmt->fetch(PDO::FETCH_ASSOC);
             if (password_verify($password, $user['password'])) {
