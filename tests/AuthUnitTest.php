@@ -5,6 +5,8 @@ use PHPUnit\Framework\TestCase;
 
 class AuthUnitTest extends TestCase
 {
+    // Use composer test to use this unit test 
+
     /** @test */
     public function loginWithNoPasswordReturns401NotAuthenticated()
     {
