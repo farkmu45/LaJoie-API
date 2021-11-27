@@ -14,6 +14,7 @@ class Response
 
     public function __construct($data, $httpCode = 200)
     {
+        // Comment out header and echo if you want to use test case
         header('Content-Type: application/json; charset=utf-8');
         http_response_code($httpCode);
         echo json_encode($data);
