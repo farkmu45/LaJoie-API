@@ -17,5 +17,10 @@
         "psr-4": {
             "LaJoie\\": "src/"
         }
+    },
+    "scripts" : {
+        "test" : [
+            "./vendor/bin/phpunit ./tests/*.php"
+        ]
     }
 }
