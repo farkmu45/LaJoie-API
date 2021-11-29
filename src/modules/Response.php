@@ -9,6 +9,7 @@ class Response
     public static $DATA_DELETED = 205;
     public static $DATA_SENT = 200;
     public static $INTERNAL_SERVER_ERROR = 500;
+    public static $NOT_FOUND = 400;
     public static $NOT_AUTHENTICATED = 401;
     public static $NOT_AUTHORIZED = 403;
 

@@ -1,4 +1,5 @@
 <?php
+
 namespace LaJoie\models;
 
 use LaJoie\modules\Response;
@@ -40,32 +41,43 @@ class Question
         }
     }
 
-    public static function getOne($id)
+    public static function getId($id)
     {
         try {
             $con = new Connection();
-            $query = "SELECT * FROM questions WHERE id = :id";
+            $query = "SELECT id FROM questions WHERE id = :id";
             $stmt = $con->db->prepare($query);
             $stmt->bindParam('id', $id);
             $stmt->execute();
-            new Response($stmt->fetchAll(PDO::FETCH_ASSOC));
+            if ($stmt->rowCount() == 0) {
+                new Response(["message" => "Not found"], Response::$NOT_FOUND);
+                exit();
+            } else {
+                new Response($stmt->fetchAll(PDO::FETCH_ASSOC));
+            }
         } catch (PDOException $e) {
             new Response(["message" => "Internal server error"], Response::$INTERNAL_SERVER_ERROR);
             exit();
         }
     }
 
-    public static function getDetails($id)
+    public static function getResponse($id)
     {
         try {
             $con = new Connection();
-            $query = "SELECT * FROM questions WHERE questions.id = :id INNER JOIN response ON response.question_id = questions.id";
+            $query = "SELECT * FROM responses WHERE question_id = :id";
             $stmt = $con->db->prepare($query);
             $stmt->bindParam('id', $id);
             $stmt->execute();
-            new Response($stmt->fetchAll(PDO::FETCH_ASSOC));
-        } catch (\Throwable $th) {
-            new Response(["message" => "Internal server error"], Response::$INTERNAL_SERVER_ERROR);
+
+            if ($stmt->rowCount() == 0) {
+                new Response(["message" => "Not found"], Response::$NOT_FOUND);
+                exit();
+            } else {
+                new Response($stmt->fetchAll(PDO::FETCH_ASSOC));
+            }
+        } catch (PDOException $e) {
+            new Response(["message" => $e->getMessage()], Response::$INTERNAL_SERVER_ERROR);
             exit();
         }
     }
