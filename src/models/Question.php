@@ -34,7 +34,7 @@ class Question
             $stmt->bindParam('detail', $detail);
             $stmt->bindParam('userId', $userId);
             $stmt->execute();
-            new Response("Data Created", Response::$DATA_CREATED);
+            new Response(["message" => "Question sent"], Response::$DATA_CREATED);
         } catch (PDOException $e) {
             new Response(["message" => "Internal server error"], Response::$INTERNAL_SERVER_ERROR);
             exit();
