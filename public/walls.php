@@ -5,6 +5,7 @@ require '../vendor/autoload.php';
 use LaJoie\models\Comment;
 use LaJoie\modules\Auth;
 use LaJoie\models\Question;
+use LaJoie\modules\Response;
 
 $body = json_decode(file_get_contents('php://input'), true);
 
@@ -27,4 +28,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         $detail = $body['detail'];
         Question::create($title, $detail, $userId);
     }
+} else {
+    new Response(["message" => "Not found"], 404);
 }
