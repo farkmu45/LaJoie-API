@@ -81,4 +81,19 @@ class Question
             exit();
         }
     }
+
+    public static function getHistory($userId)
+    {
+        try {
+            $con = new Connection();
+            $query = "SELECT * FROM questions WHERE user_id = :userId";
+            $stmt = $con->db->prepare($query);
+            $stmt->bindParam('userId', $userId);
+            $stmt->execute();
+            new Response($stmt->fetchAll(PDO::FETCH_ASSOC));
+        } catch (PDOException $e) {
+            new Response(["message" => "Internal server error"], Response::$INTERNAL_SERVER_ERROR);
+            exit();
+        }
+    }
 }
