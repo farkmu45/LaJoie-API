@@ -13,7 +13,7 @@ class Question
     {
         try {
             $con = new Connection();
-            $query = "SELECT questions.id, questions.created_at, questions.title, questions.detail, users.name, users.username FROM questions INNER JOIN users ON questions.user_id = users.id";
+            $query = "SELECT questions.id, questions.created_at, questions.title, questions.detail, users.name, users.username FROM questions INNER JOIN users ON questions.user_id = users.id WHERE questions.status = 'APPROVED'";
             $stmt = $con->db->prepare($query);
             $stmt->execute();
             new Response($stmt->fetchAll(PDO::FETCH_ASSOC));
