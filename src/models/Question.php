@@ -65,7 +65,7 @@ class Question
     {
         try {
             $con = new Connection();
-            $query = "SELECT * FROM responses WHERE question_id = :id";
+            $query = "SELECT responses.*, users.username, users.user_type_id FROM responses INNER JOIN users ON responses.user_id = users.id WHERE question_id = :id";
             $stmt = $con->db->prepare($query);
             $stmt->bindParam('id', $id);
             $stmt->execute();
