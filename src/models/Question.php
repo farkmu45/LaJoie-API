@@ -41,7 +41,7 @@ class Question
         }
     }
 
-    public static function getId($id)
+    public static function isIdValid($id)
     {
         try {
             $con = new Connection();
@@ -50,10 +50,9 @@ class Question
             $stmt->bindParam('id', $id);
             $stmt->execute();
             if ($stmt->rowCount() == 0) {
-                new Response(["message" => "Not found"], Response::$NOT_FOUND);
-                exit();
+                return false;
             } else {
-                new Response($stmt->fetchAll(PDO::FETCH_ASSOC));
+                return true;
             }
         } catch (PDOException $e) {
             new Response(["message" => "Internal server error"], Response::$INTERNAL_SERVER_ERROR);

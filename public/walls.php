@@ -17,10 +17,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         Question::getAll();
     }
 } else if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $userId =  Auth::guard();
+    $user = Auth::guard();
+    $userId =  $user['id'];
     if (isset($_GET['id'])) {
         $id = $_GET['id'];
-        Question::getId($id);
+        if (!Question::isIdValid($id)) {
+            new Response(["message" => "Not found"], Response::$NOT_FOUND);
+            exit();
+        }
         $comment = $body['comment'];
         Comment::create($id, $userId, $comment);
     } else {
@@ -29,5 +33,5 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         Question::create($title, $detail, $userId);
     }
 } else {
-    new Response(["message" => "Not found"], 404);
+    new Response(["message" => "Not found"], Response::$NOT_FOUND);
 }
