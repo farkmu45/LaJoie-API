@@ -12,5 +12,5 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         Knowledge::getAll();
     }
 } else {
-    new Response(["message" => "Not found"], 404);
+    new Response(["message" => "Not found"], Response::$NOT_FOUND);
 }

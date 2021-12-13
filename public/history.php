@@ -8,8 +8,9 @@ require '../vendor/autoload.php';
 
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-    $userId = Auth::guard();
+    $user = Auth::guard();
+    $userId =  $user['id'];
     Question::getHistory($userId);
 } else {
-    new Response(["message" => "Not found"], 404);
+    new Response(["message" => "Not found"], Response::$NOT_FOUND);
 }

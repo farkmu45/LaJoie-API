@@ -51,7 +51,7 @@ class Auth
             }
 
             if (password_verify($password, $user['password'])) {
-                return $user['id'];
+                return $user;
             }
         } catch (PDOException $e) {
             new Response(["message" => "Internal server error"], 500);

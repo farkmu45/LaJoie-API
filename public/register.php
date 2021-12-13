@@ -13,6 +13,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $password = $body['password'];
     Auth::register($name, $username, $email, $password);
 } else {
-    new Response(["message" => "Not found"], 404);
+    new Response(["message" => "Not found"], Response::$NOT_FOUND);
 }
 
