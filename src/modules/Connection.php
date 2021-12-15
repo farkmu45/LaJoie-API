@@ -9,11 +9,11 @@ use PDOException;
 
 class Connection
 {
-    public $db;
+    private static $con;
 
+    private static $instance = null;
 
-    public function __construct()
-    {
+    private function __construct() {
         if (file_exists(__DIR__ . '/.env')) {
             $dotenv = Dotenv::createImmutable(__DIR__);
             $dotenv->load();
@@ -25,10 +25,25 @@ class Connection
         $databaseName = $_ENV['DB_NAME'];
         
         try {
-            $this->db = new PDO("mysql:host=$host;dbname=$databaseName", $username, $password);
+            self::$con = new PDO("mysql:host=$host;dbname=$databaseName", $username, $password);
         } catch (PDOException $e) {
             echo $e->getMessage();
             die();
         }
     }
+
+    public static function getInstance(): self
+    {
+        if (null === self::$instance) {
+            self::$instance = new self();
+        }
+
+        return self::$instance;
+    }
+
+    public function getConnection()
+    {
+        return self::$con;
+    }
+
 }

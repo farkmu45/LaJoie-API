@@ -2,11 +2,11 @@
 
 namespace LaJoie\models;
 
-use LaJoie\modules\Connection;
+use LaJoie\modules\Model;
 use LaJoie\modules\Response;
 use PDOException;
 
-class Submission
+class Submission extends Model
 {
     public static function create($user, $experience, $document)
     {
@@ -17,9 +17,8 @@ class Submission
 
 
         try {
-            $con = new Connection();
             $query = "INSERT INTO submissions(user_id, experience, document) VALUES(:userId, :experience, :document)";
-            $stmt = $con->db->prepare($query);
+            $stmt = self::prepare($query);
             $stmt->bindParam('userId', $user['id']);
             $stmt->bindParam('experience', $experience);
             $stmt->bindParam('document', $document);

@@ -2,18 +2,17 @@
 
 namespace LaJoie\models;
 
-use LaJoie\modules\Connection;
+use LaJoie\modules\Model;
 use LaJoie\modules\Response;
 use PDOException;
 
-class Comment
+class Comment extends Model
 {
     public static function create($questionId, $userId, $comment)
     {
         try {
-            $con = new Connection();
             $query = "INSERT INTO responses(user_id, question_id, comment) VALUES(:userId, :questionId, :comment)";
-            $stmt = $con->db->prepare($query);
+            $stmt = self::prepare($query);
             $stmt->bindParam('userId', $userId);
             $stmt->bindParam('questionId', $questionId);
             $stmt->bindParam('comment', $comment);

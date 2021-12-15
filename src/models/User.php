@@ -2,19 +2,17 @@
 namespace LaJoie\models;
 
 use LaJoie\modules\Response;
-use LaJoie\modules\Connection;
-use PDO;
+use LaJoie\modules\Model;
 use PDOException;
 
-class User
+class User extends Model
 {
     public static function getByEmail($email)
     {
         try {
-            $con = new Connection();
             $query = "SELECT * FROM users WHERE email = :email";
             
-            $stmt = $con->db->prepare($query);
+            $stmt = self::prepare($query);
             $stmt->bindParam('email', $email);
             $stmt->execute();
             return $stmt;
@@ -26,9 +24,8 @@ class User
     public static function create($name, $username, $email, $password)
     {
         try {
-            $con = new Connection();
             $query = "INSERT INTO users(name, username, email, password) VALUES(:name, :username, :email, :password)";
-            $stmt = $con->db->prepare($query);
+            $stmt = self::prepare($query);
             $stmt->bindParam('name', $name);
             $stmt->bindParam('username', $username);
             $stmt->bindParam('email', $email);
@@ -44,9 +41,8 @@ class User
     public static function changeStatusToSuspend($userId)
     {
         try {
-            $con = new Connection();
             $query = "UPDATE users SET status='SUSPENDED' WHERE id = :userId";
-            $stmt = $con->db->prepare($query);
+            $stmt = self::prepare($query);
             $stmt->bindParam('userId', $userId);
             $stmt->execute();
         } catch (PDOException $e) {

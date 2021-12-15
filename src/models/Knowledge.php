@@ -2,19 +2,18 @@
 
 namespace LaJoie\models;
 
+use LaJoie\modules\Model;
 use LaJoie\modules\Response;
-use LaJoie\modules\Connection;
 use PDO;
 use PDOException;
 
-class Knowledge
+class Knowledge extends Model
 {
     public static function getAll()
     {
         try {
-            $con = new Connection();
             $query = "SELECT * FROM knowledges";
-            $stmt = $con->db->prepare($query);
+            $stmt = self::prepare($query);
             $stmt->execute();
             new Response($stmt->fetchAll(PDO::FETCH_ASSOC));
         } catch (PDOException $e) {
@@ -26,9 +25,8 @@ class Knowledge
     public static function getDetail($id)
     {
         try {
-            $con = new Connection();
             $query = "SELECT * FROM knowledge_details WHERE knowledge_id = :id";
-            $stmt = $con->db->prepare($query);
+            $stmt = self::prepare($query);
             $stmt->bindParam('id', $id);
             $stmt->execute();
             new Response($stmt->fetchAll(PDO::FETCH_ASSOC));
