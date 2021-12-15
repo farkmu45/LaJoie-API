@@ -40,4 +40,18 @@ class User
             exit();
         }
     }
+
+    public static function changeStatusToSuspend($userId)
+    {
+        try {
+            $con = new Connection();
+            $query = "UPDATE users SET status='SUSPENDED' WHERE id = :userId";
+            $stmt = $con->db->prepare($query);
+            $stmt->bindParam('userId', $userId);
+            $stmt->execute();
+        } catch (PDOException $e) {
+            new Response($e->getMessage(), 500);
+            exit();
+        }
+    }
 }
