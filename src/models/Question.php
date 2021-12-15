@@ -60,7 +60,11 @@ class Question extends Model
     public static function getResponse($id)
     {
         try {
-            $query = "SELECT responses.*, users.username, users.user_type_id FROM responses INNER JOIN users ON responses.user_id = users.id WHERE question_id = :id";
+            $query = "SELECT responses.*, users.username, users.user_type_id 
+            FROM responses 
+            INNER JOIN users ON responses.user_id = users.id 
+            WHERE question_id = :id ORDER BY users.user_type_id DESC, responses.created_at ASC";
+            
             $stmt = self::prepare($query);
             $stmt->bindParam('id', $id);
             $stmt->execute();
