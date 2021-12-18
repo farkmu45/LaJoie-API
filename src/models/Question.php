@@ -12,7 +12,7 @@ class Question extends Model
     public static function getAll()
     {
         try {
-            $query = "SELECT questions.id, questions.created_at, questions.title, questions.detail, users.name, users.username FROM questions INNER JOIN users ON questions.user_id = users.id WHERE questions.status = 'APPROVED'";
+            $query = "SELECT questions.id, questions.created_at, questions.title, questions.detail, users.name, users.username, users.picture FROM questions INNER JOIN users ON questions.user_id = users.id WHERE questions.status = 'APPROVED'";
             $stmt = self::prepare($query);
             $stmt->execute();
             new Response($stmt->fetchAll(PDO::FETCH_ASSOC));
