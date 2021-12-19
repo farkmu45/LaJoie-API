@@ -19,10 +19,9 @@ class Auth
             }
             $user = $stmt->fetch(PDO::FETCH_ASSOC);
             if (password_verify($password, $user['password'])) {
-                $data = $user['email'] . ":" . $password;
-                new Response([
-                    'token' => base64_encode($data)
-                ]);
+                $tokenData = $user['email'] . ":" . $password;
+                $user['token'] = base64_encode($tokenData);
+                new Response($user);
             } else {
                 new Response(["message" => "User not found"], 401);
             }
