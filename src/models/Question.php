@@ -64,7 +64,7 @@ class Question extends Model
     public static function getResponse($id)
     {
         try {
-            $query = "SELECT responses.*, users.username, users.user_type_id 
+            $query = "SELECT responses.*, users.picture, users.username, users.user_type_id 
             FROM responses 
             INNER JOIN users ON responses.user_id = users.id 
             WHERE question_id = :id ORDER BY users.user_type_id DESC, responses.created_at ASC";
@@ -74,7 +74,7 @@ class Question extends Model
             $stmt->execute();
 
             if ($stmt->rowCount() == 0) {
-                new Response(["message" => "Not found"], Response::$NOT_FOUND);
+                new Response([], Response::$DATA_SENT);
                 exit();
             } else {
                 new Response($stmt->fetchAll(PDO::FETCH_ASSOC));
