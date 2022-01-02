@@ -64,11 +64,11 @@ class Question extends Model
     public static function getResponse($id)
     {
         try {
-            $query = "SELECT responses.*, users.picture, users.username, users.user_type_id 
+            $query = "SELECT responses.*, users.picture, users.username, users.user_type_id, CONVERT_TZ(responses.created_at, '+00:00','+7:00') AS created_at 
             FROM responses 
             INNER JOIN users ON responses.user_id = users.id 
             WHERE question_id = :id ORDER BY users.user_type_id DESC, responses.created_at ASC";
-            
+
             $stmt = self::prepare($query);
             $stmt->bindParam('id', $id);
             $stmt->execute();
