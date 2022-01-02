@@ -12,7 +12,9 @@ class Question extends Model
     public static function getAll()
     {
         try {
-            $query = "SELECT questions.id, CONVERT_TZ(questions.created_at, '+00:00','+7:00') AS created_at, questions.title, questions.detail, users.name, users.username, users.picture 
+            $query = "SELECT questions.id, CONVERT_TZ(questions.created_at, '+00:00','+7:00') AS created_at,
+                            (SELECT count(id) FROM responses WHERE question_id = questions.id) AS comment_count,
+                            questions.title, questions.detail, users.name, users.username, users.picture 
                         FROM questions 
                         INNER JOIN users ON questions.user_id = users.id 
                         WHERE questions.status = 'APPROVED'
